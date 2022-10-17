@@ -10,24 +10,24 @@
           <el-card class="grade2">最佳:{{ bestgoard }}</el-card>
         </div>
       </el-header>
-        <el-main v-touch:swipe.left="swipeLeft" v-touch:swipe.right="swipeRight" v-touch:swipe.top="swipeTop" v-touch:swipe.bottom="swipeDown">
-          <el-card class="game-ui">
-            <template #header>
-              <div class="card-header">
-                <span>努力合成2048!!!</span>
-                <!-- <el-button></el-button> -->
-                <el-button @click="reset" class="re-button" type="warning" plain :icon="Refresh">重新开始</el-button>
-              </div>
-            </template>
-            <el-row v-for="(m, i) in modelList" :key="i">
-              <el-col :span="6" v-for="(sm, si) in modelList[i]" :key="si">
-                <el-card :style="changeColor(sm)" class="little-block">
-                  <h2 :style="activeh2(sm)" align="center">{{ sm }}</h2>
-                </el-card>
-              </el-col>
-            </el-row>
-          </el-card>
-        </el-main>
+      <el-main v-touch:swipe.left="swipeLeft" v-touch:swipe.right="swipeRight" v-touch:swipe.top="swipeTop"
+        v-touch:swipe.bottom="swipeDown">
+        <el-card class="game-ui">
+          <template #header>
+            <div class="card-header">
+              <span>努力合成2048!!!</span>
+              <el-button @click="reset" class="re-button" type="warning" plain :icon="Refresh">重新开始</el-button>
+            </div>
+          </template>
+          <el-row v-for="(m, i) in modelList" :key="i">
+            <el-col :span="6" v-for="(sm, si) in modelList[i]" :key="si">
+              <el-card :style="changeColor(sm)" class="little-block">
+                <h2 :style="activeh2(sm)" align="center">{{ sm===0 ? '' : sm }}</h2>
+              </el-card>
+            </el-col>
+          </el-row>
+        </el-card>
+      </el-main>
     </el-container>
     <el-dialog width="35%" title="已经结束了" v-model="badDialogVisible">
       <template #footer>
@@ -281,7 +281,7 @@ export default {
     badClose() {
       this.badDialogVisible = false
     },
-    swipeLeft(){
+    swipeLeft() {
       this.allOpt('left')
     },
     swipeRight() {
